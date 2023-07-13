@@ -12,6 +12,6 @@ class SplashScreenController extends GetxController {
 
   Future<void> doRedirection() async {
     await Future.delayed(const Duration(seconds: 3));
-    Get.off(() => const HomeScreen());
+    Get.off(() => HomeScreen());
   }
 }
