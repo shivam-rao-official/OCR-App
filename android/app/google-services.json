@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1077683299451",
+    "project_id": "the-editor-pro",
+    "storage_bucket": "the-editor-pro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077683299451:android:3142280e70bd1dbf416ede",
+        "android_client_info": {
+          "package_name": "com.example.ocr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077683299451-6cetgnvvj5naoh05t6qve7j6ro2tevkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX-HokD3SW1jWCeTmwEj85FCmzuXUIZzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077683299451-6cetgnvvj5naoh05t6qve7j6ro2tevkg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
