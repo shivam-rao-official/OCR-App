@@ -17,6 +17,7 @@ class TextRecognizerController extends GetxController {
   }
 
   Future<void> getTextFromImage(XFile? image) async {
+    CustomLoader.showLoadingDialog("Fetching texts from image");
     final textRecognizer = GoogleMlKit.vision.textRecognizer();
     final inputImage = InputImage.fromFilePath(image!.path);
 
@@ -30,6 +31,7 @@ class TextRecognizerController extends GetxController {
       }
     }
 
+    CustomLoader.hideLoadingDialog();
     Get.to(() => const ViewCapturedTextPage());
   }
 }
