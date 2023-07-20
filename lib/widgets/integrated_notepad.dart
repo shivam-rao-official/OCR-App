@@ -26,7 +26,9 @@ class IntegratedNotepad extends StatelessWidget {
                     ? _editorTitleFocusNode.unfocus()
                     : _editorTitleFocusNode.requestFocus();
               },
-              onChanged: (updatedString) {},
+              onChanged: (updatedString) {
+                _capturedTextController.title.value = updatedString;
+              },
               focusNode: _editorTitleFocusNode,
               enableInteractiveSelection: true,
               enableSuggestions: true,

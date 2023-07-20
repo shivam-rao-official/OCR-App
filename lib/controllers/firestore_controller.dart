@@ -2,32 +2,40 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:ocr/widgets/custom_loader.dart';
 
-import '../model/Notes.dart';
+import '../model/notes_model.dart';
 
 class FireStoreController extends GetxController {
   static final _db = FirebaseFirestore.instance;
+  static final collectionReference = _db.collection("notes");
   List<dynamic> fetchedData = [].obs;
 
-  doInsert(String collectionName, Map<String, dynamic> data) async{
-   await _db.collection(collectionName).add(data).whenComplete(() {
-     CustomLoader.showSuccessToast(
-         description: "Data Saved Successfully");
-   }
-   ).catchError(() => CustomLoader.showErrorToast());
-
+  static doInsert(String collectionName, Notes data) async {
+    CustomLoader.showLoadingDialog("Saving Data....");
+    var jsonData = data.toJson();
+    var response = await collectionReference.add(jsonData);
+    CustomLoader.hideLoadingDialog();
+    if (response.id.isNotEmpty) {
+      CustomLoader.showSuccessToast(description: "Data saved successfully");
+    } else {
+      CustomLoader.showErrorToast();
+    }
   }
 
   doUpdate() {}
 
   doDelete() {}
 
-  doFetch(String collectionName) async{
-    var querySnapshot = await _db.collection(collectionName).get();
-
-    fetchedData = querySnapshot.docs.map((e) => Notes.fromSnapshot(e)).toList();
-    for(var i = 0;i < fetchedData.length; i++){
-      // print(fetchedData[i].);
-    }
+  static Stream<List<Notes>> doFetchAll() {
+    var data = collectionReference.snapshots().map(
+          (notes) => notes.docs
+              .map(
+                (note) => Notes.fromJson(
+                  note.data(),
+                ),
+              )
+              .toList(),
+        );
+    return data;
   }
 
   doPartialUpdate() {}

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:ocr/controllers/image_to_text_controller.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class SpeechToTextController extends GetxController{
@@ -8,7 +7,6 @@ class SpeechToTextController extends GetxController{
 
   var convertedTextFromSpeech = "".obs;
 
-  static var _capturedTextFromImage = Get.put(TextRecognizerController());
 
 
 
@@ -17,7 +15,6 @@ class SpeechToTextController extends GetxController{
     isListening.value = true;
     convertedTextFromSpeech.value = "";
     var available = await speechToText.initialize();
-    print("=================================> Listening");
     if (available) {
       speechToText.listen(onResult: (result) {
         convertedTextFromSpeech.value =
