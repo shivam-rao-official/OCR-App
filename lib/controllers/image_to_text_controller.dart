@@ -7,16 +7,22 @@ import 'package:ocr/widgets/custom_loader.dart';
 class TextRecognizerController extends GetxController {
   static final _imagePicker = ImagePicker();
   var myText = "".obs;
+  var title = "".obs;
 
   Future<void> pickImage(ImageSource source) async {
-    final pickedImage = await _imagePicker.pickImage(source: source);
+    final pickedImage = await _imagePicker.pickImage(
+        source: source,
+        requestFullMetadata: false,
+        preferredCameraDevice: CameraDevice.rear);
     if (pickedImage != null) {
+      
       myText.value = "";
       getTextFromImage(pickedImage);
     }
   }
 
   Future<void> getTextFromImage(XFile? image) async {
+    CustomLoader.showLoadingDialog("Fetching texts from image");
     final textRecognizer = GoogleMlKit.vision.textRecognizer();
     final inputImage = InputImage.fromFilePath(image!.path);
 
@@ -30,6 +36,7 @@ class TextRecognizerController extends GetxController {
       }
     }
 
-    Get.to(() => const ViewCapturedTextPage());
+    CustomLoader.hideLoadingDialog();
+    Get.to(() => ViewCapturedTextPage());
   }
 }

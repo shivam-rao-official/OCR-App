@@ -6,7 +6,6 @@ class CustomAppbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       centerTitle: true,
       title: const Text("OCR Demo"),
     );
